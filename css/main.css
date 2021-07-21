@@ -1,0 +1,38 @@
+body {
+    background-color:beige;
+    text-align: center;
+}
+
+
+.board-container {
+    margin: 0 auto;
+    top: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.7s;
+}
+
+.cell {
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5em;
+    transition: 0.5s;
+    border: black 2px solid;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.cell span {
+   /* opacity: 0; */
+}
+
+.cell.clicked span {
+    background-color:chartreuse;
+    opacity: 1;
+}
+
+
+  
