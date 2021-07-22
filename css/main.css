@@ -13,6 +13,10 @@ body , html{
     text-align: center;
 }
 
+h1 {
+    text-shadow: 2px 2px 10px rgb(86, 98, 110);
+}
+
 .difficulty {
     border: black 2px solid;
     background: linear-gradient(to bottom,  #c5c7c6, rgb(149, 149, 149), rgb(71, 71, 71));
@@ -71,6 +75,10 @@ button {
     font-size: 30px;
 }
 
+button:active {
+    position:relative;
+    top:4px;
+}
 
 .board-container {
     margin-top: 50px;
@@ -89,8 +97,6 @@ table {
     height: 25px;
     min-width: 25px;
     width: 25px;
-    overflow: hidden;
-    word-wrap: break-word;
     font-size: 12px;
     background-color: #ccc;
     border: 3px solid;
@@ -107,13 +113,39 @@ table {
     border-color: #777 #eee #eee #777;
 }
 
+.cell.clicked:hover {
+    cursor: default;
+}
+
 .cell.clicked-mine {
     background-color: red;
 }
 
-.cell.clicked:hover {
-    cursor: default;
+.cell.safe-click {
+    background-color: #28f588;
 }
+
+.safe-btn {
+    position: relative;
+    font-weight: bold;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 40px;
+    cursor: pointer;
+    border: black 2px solid;
+    background: linear-gradient(to bottom,  #28f588, rgb(157, 255, 186), rgb(206, 255, 213));
+    border-color: #28f588 #83faba rgb(209, 255, 211) #28f588;
+    font-size: 15px;
+    box-shadow: 10px 8px 13px 4px rgba(1, 39, 3, 0.72);
+}
+
+.safe-btn:active {
+    position:relative;
+    top:4px;
+}
+
 
 
 .footer {

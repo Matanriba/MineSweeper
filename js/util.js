@@ -11,9 +11,9 @@ function renderBoard() {
             if (currCell.isShown) {
                 ifClickedClass = ' clicked';
                 if (currCell.isMine) cellCont = MINE;
-                else if (!currCell.isMine && cell.minesAroundCount === 0) cellCont = '';
-                else if (!currCell.isMine && cell.minesAroundCount !== 0) cellCont = currCell.minesAroundCount;
-            } else if (currCell.isMarked) cellCont = MARKED;
+                else if (!currCell.isMine && currCell.minesAroundCount === 0) cellCont = '';
+                else if (!currCell.isMine && currCell.minesAroundCount !== 0) cellCont = currCell.minesAroundCount;
+            } if (currCell.isMarked) cellCont = MARKED;
 
             strHTML += `\t\t<td data-cell="${i}-${j}" class="cell${ifClickedClass}" onclick="cellClicked(${i}, ${j})" oncontextmenu="markCell(event,this,${i},${j})">${cellCont}</td>\n`;
         }
