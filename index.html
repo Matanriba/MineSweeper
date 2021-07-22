@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mine Sweeper</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body onload="init()">
-    <h1>Mine Sweeper!</h1>
+    <h1>Mine Sweeper</h1>
 
 
-    <!-- onmouseup="handleMouse(event)" -->
-    <div  oncontextmenu="return false" class="board-container"></div>
+
+    <div class="difficulty">
+        <p>Select Difficulty:</p>
+        <form class="diff-buttons">
+            <input type="radio" name="level" onclick="setLevel(1)" checked />
+            <label for="1">Beginner</label>
+            <input type="radio" name="level" onclick="setLevel(2)" />
+            <label for="2">Medium</label>
+            <input type="radio" name="level" onclick="setLevel(3)" />
+            <label for="3">Expert</label>
+        </form>
+    </div>
+    <div class="timer">Time: <span>0</span> Sec</div>
+    <button class="smiley" onclick="init()"></button>
+    <div class="lives">Lives: <span></span></div>
+    <div class="board-container"></div>
+
+
+    <div class="footer">Matan Riba</div>
+
     <script src="js/util.js"></script>
-    <!-- <script src="js/main1.js"></script> -->
-    <script src="js/main.js"></script>
+    <script src="js/newMain.js"></script>
 </body>
+
 </html>
