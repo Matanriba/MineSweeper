@@ -263,6 +263,7 @@ function showHint(posI, posJ) {
             elCell.classList.remove('clicked');
             if (elCell.classList.contains('clicked-mine')) elCell.classList.remove('clicked-mine');
             elCell.innerText = '';
+            gBoard[positions[k].i][positions[k].j].isShown = false;
         } 
         gIsHint = !gIsHint;
         console.log(gIsHint);
