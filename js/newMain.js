@@ -8,6 +8,7 @@ var gSmiley = document.querySelector('.smiley')
 var gTimerInterval;
 var gCurrDifficulty = 1;
 var gSafeClicks;
+var gIsHint = false;
 
 
 // Global vars - main
@@ -21,11 +22,16 @@ var gIsRightMouse = false;
 // Init functions
 
 function init() {
+    gIsHint = false;
     clearInterval(gTimerInterval);
     document.querySelector('.timer span').innerText = 0;
     document.querySelector('.lives span').innerText = gCurrDifficulty;
+    for (var i = 1; i <= 3; i++) {
+        document.querySelector(`.hint${i}`).src = 'https://img.icons8.com/fluent/48/000000/pixel-heart.png';
+        document.querySelector(`.hint${i}`).classList.remove('clicked-hint');
+    }
     gSafeClicks = 3;
-    document.querySelector('.safe-btn span').innerText = gSafeClicks;
+    document.querySelector('.side-container p span').innerText = gSafeClicks;
     gLives = gCurrDifficulty;
     gGame.hasStarted = false;
     gGame.isOn = true;
@@ -38,27 +44,6 @@ function init() {
     renderBoard(gBoard, '.board-container');
 }
 
-function createBoard(size) {
-    var board = [];
-    for (var i = 0; i < size; i++) {
-        var row = [];
-        for (var j = 0; j < size; j++) {
-            row.push(createCell());
-        }
-        board.push(row);
-    }
-    return board;
-}
-
-function createCell() {
-    var cell = {
-        minesAroundCount: 0,
-        isShown: false,
-        isMine: false,
-        isMarked: false
-    };
-    return cell;
-}
 function setGameStart(pos) {
     gGame.hasStarted = true;
     // TODO: start timer
@@ -137,6 +122,7 @@ function cellClicked(cellI, cellJ) {
     var currPos = { i: cellI, j: cellJ };
     if (!gGame.hasStarted) setGameStart(currPos);
     else if (currCell.isMarked) return;
+    else if (!currCell.isShown && gIsHint) showHint(cellI, cellJ);
     else if (currCell.isShown && currCell.minesAroundCount && gIsRightMouse) {
         expandShown(currPos);
         gIsRightMouse = false;
@@ -150,9 +136,8 @@ function cellClicked(cellI, cellJ) {
             gameIsOver('Lose');
             return;
         }
-    } else if (!currCell.minesAroundCount) {
-        expandShown(currPos);
-    } else showCell(currPos);
+    } else if (!currCell.minesAroundCount) expandShown(currPos);
+    else showCell(currPos);
     checkIfGameOver();
 }
 
@@ -226,6 +211,8 @@ function flagAllUnmarked() {
     renderBoard();
 }
 
+// Bonus Functions
+
 function findEmptyCellPos() {
     var emptyPoss = [];
     for (var i = 0; i < gLevel.size; i++) {
@@ -246,6 +233,38 @@ function safeClick() {
         currSafeElCell.classList.add('safe-click');
         setTimeout(function () { currSafeElCell.classList.remove('safe-click') }, 1000);
         gSafeClicks--;
-        document.querySelector('.safe-btn span').innerText = gSafeClicks;
+        document.querySelector('.side-container p span').innerText = gSafeClicks;
     }
+}
+
+function turnOnHint(elHint) {
+    if (!gGame.hasStarted) return;
+    if (elHint.classList.contains('clicked-hint')) return;
+    elHint.classList.add('clicked-hint');
+    elHint.src = 'https://img.icons8.com/ios-filled/50/000000/pixel-heart.png'
+    console.log(elHint);
+    gIsHint = !gIsHint;
+}
+
+function showHint(posI, posJ) {
+    var positions = [];
+    for (var i = posI - 1; i <= posI + 1; i++) {
+        if (i < 0 || i >= gLevel.size) continue;
+        for (var j = posJ - 1; j <= posJ + 1; j++) {
+            if (j < 0 || j >= gLevel.size) continue;
+            showCell({ i, j });
+            positions.push({ i, j });
+        }
+    }
+    console.log(positions)
+    setTimeout(function () {
+        for (var k = 0; k < positions.length; k++) {
+            var elCell = document.querySelector(`[data-cell="${positions[k].i}-${positions[k].j}"]`);
+            elCell.classList.remove('clicked');
+            if (elCell.classList.contains('clicked-mine')) elCell.classList.remove('clicked-mine');
+            elCell.innerText = '';
+        } 
+        gIsHint = !gIsHint;
+        console.log(gIsHint);
+    }, 1000);
 }

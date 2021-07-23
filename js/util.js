@@ -1,5 +1,27 @@
 'use strict'
 
+function createBoard(size) {
+    var board = [];
+    for (var i = 0; i < size; i++) {
+        var row = [];
+        for (var j = 0; j < size; j++) {
+            row.push(createCell());
+        }
+        board.push(row);
+    }
+    return board;
+}
+
+function createCell() {
+    var cell = {
+        minesAroundCount: 0,
+        isShown: false,
+        isMine: false,
+        isMarked: false
+    };
+    return cell;
+}
+
 function renderBoard() {
     var strHTML = '<table><tbody>\n';
     for (var i = 0; i < gBoard.length; i++) {
@@ -40,9 +62,6 @@ function showCell(pos) {
     elCell.classList.add('clicked');
 }
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
 
 function markCell(event, elCell, cellI, cellJ) {
     event.preventDefault();
@@ -58,4 +77,8 @@ function markCell(event, elCell, cellI, cellJ) {
     }
     gIsRightMouse = false;
     cell.isMarked = !cell.isMarked;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }

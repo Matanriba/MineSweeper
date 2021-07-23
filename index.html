@@ -25,14 +25,31 @@
             <label for="3">Expert</label>
         </form>
     </div>
-    <div class="timer">Time: <span>0</span> Sec</div>
-    <button class="smiley" onclick="init()"></button>
-    <div class="lives">Lives: <span></span></div>
+    <div class="info-container">
+        <div class="timer">Time: <span>0</span> Sec</div>
+        <button class="smiley" onclick="init()"></button>
+        <div class="lives">Lives: <span></span></div>
+    </div>
+
+    <div class="side-container">
+
+        <img src="https://img.icons8.com/color/48/000000/windows-95.png" onclick="safeClick()" />
+        <p> Safe Clicks: <span></span></p>
+    </div>
+
+    <div class="hint-container">
+        <img class="hint1" src="https://img.icons8.com/fluent/48/000000/pixel-heart.png" onclick="turnOnHint(this)" />
+        <p> hint1.exe <span></span></p>
+        <img class="hint2" src="https://img.icons8.com/fluent/48/000000/pixel-heart.png" onclick="turnOnHint(this)" />
+        <p> hint2.exe <span></span></p>
+        <img class="hint3" src="https://img.icons8.com/fluent/48/000000/pixel-heart.png" onclick="turnOnHint(this)" />
+        <p> hint3.exe <span></span></p>
+    
+    </div>
     <div class="board-container"></div>
 
-    <button class="safe-btn" onclick="safeClick()">Safe Clicks: <span></span></button>
 
-    <div class="footer">&copy; Matan Riba</div>
+    <div class="footer">&copy; Matan Riba </div>
 
     <script src="js/util.js"></script>
     <script src="js/newMain.js"></script>
