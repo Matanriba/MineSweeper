@@ -130,7 +130,7 @@ function cellClicked(cellI, cellJ) {
     }
     if (currCell.isMine) {
         showCell(currPos);
-        gLives--;
+        if (!gIsHint) gLives--;
         document.querySelector('.lives span').innerText = gLives;
         if (gLives === 0) {
             gameIsOver('Lose');

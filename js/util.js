@@ -54,8 +54,8 @@ function showCell(pos) {
     gGame.shownCount++;
     var elCell = document.querySelector(`[data-cell="${pos.i}-${pos.j}"]`);
     if (cell.isMine) {
-        elCell.innerText = MINE;
         elCell.classList.add('clicked-mine');
+        elCell.innerText = MINE;
     }
     else if (cell.minesAroundCount !== 0) elCell.innerText = cell.minesAroundCount;
     else if (cell.minesAroundCount === 0) elCell.innerText = '';
